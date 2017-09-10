@@ -91,6 +91,7 @@ public:
 	void SetPosition(const Vector3& position);
 	/// <summary>座標取得　</summary>
 	Vector3 GetPosition() const;
+	void SetMatrix(const Matrix4& matrix);
 	/// <summary>変換行列取得　</summary>
 	Matrix4 GetMatrix() const;
 	Matrix4 GetRotate() const;

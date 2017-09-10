@@ -28,7 +28,6 @@ SkinningMesh::~SkinningMesh()
 
 void SkinningMesh::Update(float dt)
 {
-	//‚±‚±C³
 	animation.Update(dt);
 	Renderer* renderer = Renderer::GetInstance();
 	renderer->BindAnimationBlend(modelInfo, animation.GetMotion(), animation.GetMotionTime());

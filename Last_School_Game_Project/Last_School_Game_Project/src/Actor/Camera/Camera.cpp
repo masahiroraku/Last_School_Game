@@ -85,8 +85,8 @@ void Camera::OnUpdate(float deltaTime)
 void Camera::OnDraw(Renderer & renderer)
 {
 #if _DEBUG
-	BoundingSphere(target->GetPosition(), TargetCanRockOnDistance).Draw();
-	body->Transform(GetMatrix())->Draw();
+	//BoundingSphere(target->GetPosition(), TargetCanRockOnDistance).Draw();
+	//body->Transform(GetMatrix())->Draw();
 #endif
 }
 

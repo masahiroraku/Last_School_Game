@@ -242,6 +242,11 @@ Vector3 Actor::GetPosition() const {
 	return position;
 }
 
+void Actor::SetMatrix(const Matrix4 & matrix)
+{
+	this->matrix = matrix;
+}
+
 Matrix4 Actor::GetMatrix() const {
 	return Matrix4(matrix).SetPosition(position);
 }

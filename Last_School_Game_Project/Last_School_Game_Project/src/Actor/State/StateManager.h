@@ -16,13 +16,13 @@
 */
 class StateManager {
 public:
-	using Function = std::function<void(void)>;
+	using Function = std::function<void(int,int)>;
 public:
 	StateManager();
 	~StateManager();
 	void Update(float deltaTime);
 	void Add(int id, const IStatePtr& state);
-	void Change(int id);
+	void Change(int id, int motion = 0);
 	void SetChangeFunc(const Function& func);
 private:
 	//!ÉRÉsÅ[ã÷é~
@@ -34,4 +34,5 @@ private:
 	StateContainer stateContainer;
 	IStatePtr currentState;
 	Function onChangeFunc;
+	int id;
 };

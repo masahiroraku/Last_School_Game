@@ -4,7 +4,8 @@
 StateManager::StateManager()
 	: stateContainer()
 	, currentState(nullptr)
-	, onChangeFunc([]() {})
+	, onChangeFunc([](int,int) {})
+	, id(-1)
 {
 
 }
@@ -16,16 +17,20 @@ void StateManager::Update(float deltaTime) {
 		currentState->Update(deltaTime);
 		return;
 	}
-	Change(currentState->GetNextState());
+	Change(currentState->GetNextState(),currentState->GetNextAnime());
 }
 void StateManager::Add(int id, const IStatePtr & state)
 {
 	stateContainer.emplace(id, state);
 }
-void StateManager::Change(int id)
+void StateManager::Change(int id, int motion)
 {
-	onChangeFunc();
+	onChangeFunc(id,motion);
+	if (this->id == id)
+		return;
+	this->id = id;
 	currentState = stateContainer.at(id);
+	currentState->Initialize();
 }
 
 void StateManager::SetChangeFunc(const Function & func)

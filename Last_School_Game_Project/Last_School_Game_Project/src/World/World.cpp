@@ -24,7 +24,7 @@ void World::Update(float deltaTime) {
 
 void World::Draw(Renderer& renderer) {
 	camera->Draw(renderer);
-	field->Draw(renderer);
+	//field->Draw(renderer);
 	actorManager.Draw(renderer);
 
 }

@@ -14,6 +14,7 @@
 #include"Math/Ease/Ease.h"
 #include"Effect/EffectManager.h"
 #include"Utility/Utility.h"
+#include"Actor/Player/Player.h"
 
 GameMainScene::GameMainScene(WorldPtr& world)
 	: isEnd_(false)
@@ -54,11 +55,11 @@ void GameMainScene::Initialize() {
 
 
 	world->Initialize();
-	//world->AddCamera(std::make_shared<Camera>(*world));
+	world->AddCamera(std::make_shared<Camera>(*world));
 	//world->AddField(std::make_shared<Field>(renderer->GetModelHandle(Assets::Model::CollisionStage)));
 
-	//ActorPtr player = std::make_shared<Player>(*world, Vector3(0, 0, 0));
-	//world->AddActor(ActorGroup::Player, player);
+	ActorPtr player = std::make_shared<Player>(*world, Vector3(0, 0, 0));
+	world->AddActor(ActorGroup::Player, player);
 
 	//ActorPtr boss = std::make_shared<Boss>(*world, Vector3(0,0,8), *player);
 	//world->AddActor(ActorGroup::Enemy, boss);
@@ -79,38 +80,18 @@ void GameMainScene::Initialize() {
 
 void GameMainScene::Update(float deltaTime) {
 
-	//if (Input::GetInstance().GetCommand(Command::Pause) && isGameEnd == false) {
-	//	//Sound::GetInstance().PlaySE(Assets::Sound::SE_Decide);
-	//	pause = !pause;
-	//	pauseScene.Initialize();
-	//}
-
-	//if (isResultDraw) {
-	//	UpdateResult(deltaTime);
-	//}
-
-	//if (!pause) {
-	//	world->Update(deltaTime);
-	//	EffectManager::GetInstance().Update(deltaTime);
-	//	EffectManager::GetInstance().Sync3DSetting();
-	//	return;
-	//}
-
-
-	//pauseScene.Update(deltaTime);
+	if (!pause) {
+		world->Update(deltaTime);
+		EffectManager::GetInstance().Update(deltaTime);
+		EffectManager::GetInstance().Sync3DSetting();
+		return;
+	}
 }
 
 void GameMainScene::Draw() const {
-	//world->Draw(*renderer);
+	world->Draw(*renderer);
 
-	//EffectManager::GetInstance().Draw();
-
-	//if (pause) {
-	//	pauseScene.Draw(*renderer);
-	//}
-	//if (isResultDraw) {
-	//	DrawResult(*renderer);
-	//}
+	EffectManager::GetInstance().Draw();
 }
 
 bool GameMainScene::IsEnd() const {

@@ -15,7 +15,11 @@ public:
 	/// <summary>
 	/// 仮想デストラクタ
 	/// </summary>
-	virtual ~IState() {}	
+	virtual ~IState() {}
+	/// <summary>
+	/// 初期化
+	/// </summary>
+	virtual void Initialize() = 0;
 	/// <summary>
 	/// 状態の更新
 	/// </summary>
@@ -33,4 +37,9 @@ public:
 	/// </summary>
 	/// <returns>次の状態</returns>
 	virtual int GetNextState() const = 0;
+	/// <summary>
+	/// 次に再生するアニメーション番号を取得する
+	/// </summary>
+	/// <returns>次に再生するアニメーション番号</returns>
+	virtual int GetNextAnime() const = 0;
 };
