@@ -13,6 +13,7 @@
 enum class ActorGroup;
 class ICamera;
 class IField;
+class ILight;
 enum class EventMessage;
 
 /*! @class IWorld
@@ -59,6 +60,11 @@ public:
 	/// </summary>
 	/// <returns>ステージのポインタ</returns>
 	virtual IField& GetField() const = 0;
+	/// <summary>
+	/// ３D空間の照明のポインタを取得
+	/// </summary>
+	/// <returns>３D空間の照明のポインタ</returns>
+	virtual ILight& GetLight() const = 0;
 	/// <summary>
 	/// 全アクターにイベントメッセージを送信
 	/// </summary>

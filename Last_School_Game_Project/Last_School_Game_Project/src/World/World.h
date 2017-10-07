@@ -11,6 +11,7 @@
 #include "Actor/Base/ActorManager.h"
 #include"Actor/Camera/CameraPtr.h"
 #include"Actor/Field/FieldPtr.h"
+#include"Actor/Light/LightPtr.h"
 
 class Renderer;
 
@@ -55,6 +56,16 @@ public:
 	/// </summary>
 	/// <returns>カメラのポインタ</returns>
 	virtual ICamera& GetCamera() override;
+	/// <summary>
+	/// ３D空間の照明を追加
+	/// </summary>
+	/// <param name="light">３D空間の照明のポインタ</param>
+	void AddLight(const LightPtr& light);
+	/// <summary>
+	/// ３D空間の照明のポインタを取得
+	/// </summary>
+	/// <returns>３D空間の照明のポインタ</returns>
+	virtual ILight& GetLight() const override;
 	/// <summary>
 	/// ステージを追加
 	/// </summary>
@@ -108,6 +119,8 @@ private:
 	CameraPtr camera;
 	//!ステージのポインタ
 	FieldPtr field;
+	//!３D空間の照明のポインタ
+	LightPtr light;
 	//!リスナー用の関数
 	std::function<void(EventMessage, void*)> listener;
 };

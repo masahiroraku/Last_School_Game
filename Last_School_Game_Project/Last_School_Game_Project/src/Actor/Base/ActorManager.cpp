@@ -73,11 +73,6 @@ void ActorManager::RegisterGroup() {
 
 void ActorManager::Collide() {
 	actors[ActorGroup::Enemy]->CollideChildren(*actors[ActorGroup::Player]);
+	actors[ActorGroup::Weapon]->CollideChildren(*actors[ActorGroup::Enemy]);
 	actors[ActorGroup::Player]->CollideChildren(*actors[ActorGroup::Enemy]);
-	actors[ActorGroup::Weapon]->CollideChildren(*actors[ActorGroup::Player]);
-	actors[ActorGroup::Enemy]->CollideChildren(*actors[ActorGroup::Weapon]);
-	actors[ActorGroup::Enemy]->CollideSibling();
-	actors[ActorGroup::Player]->CollideChildren(*actors[ActorGroup::Stage]);
-	actors[ActorGroup::Weapon]->CollideChildren(*actors[ActorGroup::Stage]);
-	actors[ActorGroup::Enemy]->CollideChildren(*actors[ActorGroup::Stage]);
 }

@@ -29,6 +29,18 @@ bool ShapeBase::Collide_Line(const ShapeBase& shape, HitInfo& hitInfo) {
 	return false;
 }
 
+bool ShapeBase::Collide_BoundingBox(const ShapeBase & shape, HitInfo & hitInfo)
+{
+	assert(!"It does not override this function.");
+	return false;
+}
+
+bool ShapeBase::Collide_OrientedBoundingBox(const ShapeBase & shape, HitInfo & hitInfo)
+{
+	assert(!"It does not override this function.");
+	return false;
+}
+
 void ShapeBase::Draw() const {
 
 }

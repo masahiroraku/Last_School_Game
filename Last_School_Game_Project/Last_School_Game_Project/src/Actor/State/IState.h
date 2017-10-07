@@ -7,6 +7,8 @@
 * @date 2017/09/01
 */
 
+enum class EventMessage;
+
 /*! @class IState
 *   @brief アクターの状態関数の抽象クラス
 */
@@ -25,6 +27,12 @@ public:
 	/// </summary>
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) = 0;	
+	/// <summary>
+	/// アクターのメッセージを受け取る
+	/// </summary>
+	/// <param name="message">メッセージの種類</param>
+	/// <param name="param">メッセージと一緒に送られる情報</param>
+	virtual void HandleMessage(EventMessage message, void* param) = 0;
 	/// <summary>
 	/// 次の状態に遷移するかどうか
 	/// </summary>

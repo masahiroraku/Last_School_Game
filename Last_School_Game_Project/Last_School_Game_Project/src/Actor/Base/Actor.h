@@ -9,13 +9,14 @@
 #include"Math\Matrix4\Matrix4.h"
 #include"ActorTag.h"
 #include "Status.h"
-#include "ActorGroup.h"
-#include"Collision\ShapePtr.h"
+#include"Collision/ShapePtr.h"
+#include"EventMessage.h"
+#include"ActorTag.h"
+#include"ActorGroup.h"
 class HitInfo;
 
 class IWorld;
 class Renderer;
-enum class EventMessage;
 
 
 
@@ -97,7 +98,7 @@ public:
 	Matrix4 GetRotate() const;
 
 	/// <summary> 概要 :　状態取得　</summary>
-	const Status GetStatus() const;
+	Status GetStatus() const;
 
 	/// <summary>名前取得　</summary>
 	const std::string& GetName() const;
@@ -106,9 +107,6 @@ public:
 	ActorTag GetTag() const;
 
 	ShapePtr GetBody() const;
-	int SetID(int id);
-	int GetID() const;
-	const Actor& GetParent() const;
 
 	std::forward_list<ActorPtr>& GetChildren();
 	int GetChildNum() const;
@@ -127,16 +125,9 @@ protected:
 	Matrix4		matrix;
 	Status			status;
 	std::string		name;
-
-	ActorTag tag;
-
 	ShapePtr body;
-
-	const Actor* parent;
-
 	IWorld*			world;
-	int id;
-
+	ActorTag tag;
 private:
 	std::forward_list<ActorPtr> children;
 public:

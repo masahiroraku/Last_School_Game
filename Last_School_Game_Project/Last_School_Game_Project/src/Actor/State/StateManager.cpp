@@ -1,5 +1,6 @@
 #include"StateManager.h"
 #include"IState.h"
+#include"Actor/Base/EventMessage.h"
 
 StateManager::StateManager()
 	: stateContainer()
@@ -10,7 +11,6 @@ StateManager::StateManager()
 
 }
 StateManager::~StateManager() {
-
 }
 void StateManager::Update(float deltaTime) {
 	if (!currentState->IsEnd()) {
@@ -19,6 +19,10 @@ void StateManager::Update(float deltaTime) {
 	}
 	Change(currentState->GetNextState(),currentState->GetNextAnime());
 }
+void StateManager::HandleMessage(EventMessage message, void * param)
+{
+	currentState->HandleMessage(message, param);
+}
 void StateManager::Add(int id, const IStatePtr & state)
 {
 	stateContainer.emplace(id, state);
@@ -26,7 +30,7 @@ void StateManager::Add(int id, const IStatePtr & state)
 void StateManager::Change(int id, int motion)
 {
 	onChangeFunc(id,motion);
-	if (this->id == id)
+	if (this->id == id || id < -1)
 		return;
 	this->id = id;
 	currentState = stateContainer.at(id);
@@ -36,4 +40,19 @@ void StateManager::Change(int id, int motion)
 void StateManager::SetChangeFunc(const Function & func)
 {
 	onChangeFunc = func;
+}
+
+int StateManager::GetState() const
+{
+	return id;
+}
+
+int StateManager::GetStateNum() const
+{
+	return static_cast<int>(stateContainer.size());
+}
+
+void StateManager::Reset()
+{
+	id = -1;
 }

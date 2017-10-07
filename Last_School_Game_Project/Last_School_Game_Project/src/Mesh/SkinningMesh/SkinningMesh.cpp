@@ -1,5 +1,7 @@
 #include "SkinningMesh.h"
 #include"Renderer/Renderer.h"
+#include"Math/Convert/Convert.h"
+
 SkinningMesh::SkinningMesh(Assets::Model modelID, Assets::Animation animationID, bool isDeplicate)
 	: animation(0)
 	, modelInfo()
@@ -77,4 +79,19 @@ void SkinningMesh::Clear()
 		auto renderer = Renderer::GetInstance();
 		renderer->DeleteModel(modelInfo.modelID);
 	}
+}
+
+Vector3 SkinningMesh::GetBonePosition(int boneIndex) const
+{
+	return Convert::ToVector3(MV1GetFramePosition(modelInfo.modelID, boneIndex));
+}
+
+Matrix4 SkinningMesh::GetBoneLocalMatrix(int boneIndex) const
+{
+	return Convert::ToMatrix4(MV1GetFrameLocalMatrix(modelInfo.modelID, boneIndex));
+}
+
+Matrix4 SkinningMesh::GetBoneWorldMatrix(int boneIndex) const
+{
+	return Convert::ToMatrix4(MV1GetFrameLocalWorldMatrix(modelInfo.modelID, boneIndex));
 }

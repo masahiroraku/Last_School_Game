@@ -3,13 +3,14 @@
 #include"Input/Input.h"
 #include"Actor/Player/Player.h"
 
-Move::Move(Actor & player, ICamera & camera)
+Move::Move(Actor & player, ICamera & camera, SkinningMesh& meshPtr)
 	: isEnd(false)
 	, player(player)
 	, camera(camera)
-	, state(0)
-	, WalkSpeed(1.0f)
-	, RunSpeed(3.0f)
+	, meshPtr(meshPtr)
+	, state(Player::State::Move)
+	, WalkSpeed(0.1f)
+	, RunSpeed(0.3f)
 	, speed(WalkSpeed)
 	, position()
 {
@@ -22,23 +23,52 @@ Move::~Move()
 void Move::Initialize()
 {
 	isEnd = false;
+	state = Player::State::Idle;
+	anime = Player::Anime::Idle_;
 }
 
 void Move::Update(float deltaTime)
 {
+	if (Input::GetInstance().GetCommand(Command::Shoot_Arrow)) {
+		isEnd = true;
+		state = Player::State::BowAttack;
+		anime = Player::Anime::Aim_OverDraw_;
+	}
+
 	Vector3 velocity = Input::GetInstance().GetVelocity();
 	if (velocity.SquareLength() <= 0.1f) {
 		isEnd = true;
-		state = static_cast<int>(Player::State::Idle);
+		state = Player::State::Idle;
+		anime = Player::Anime::Idle_;
 		return;
+	}
+	if (Input::GetInstance().GetCommand(Command::SwordAttack)) {
+		isEnd = true;
+		state = Player::State::SwordAttack;
+		return;
+	}
+
+	if (Input::GetInstance().GetCommand(Command::Dash)) {
+		speed = RunSpeed;
+		meshPtr.ChangeMotion(Player::Anime::Run_);
+	}
+	else {
+		speed = WalkSpeed;
+		meshPtr.ChangeMotion(Player::Anime::Walk_);
 	}
 
 	velocity.Normalize();
 	LookAtFront(velocity);
 	Matrix4 cameraMatrix = camera.GetMatrix();
-	position += -cameraMatrix.GetFront() * speed  * deltaTime;
-	position += -cameraMatrix.GetLeft()  * speed  * deltaTime;
+	position += -cameraMatrix.GetFront() * velocity.z * speed  * deltaTime;
+	position += -cameraMatrix.GetLeft()  * velocity.x * speed  * deltaTime;
 	player.SetPosition(position);
+
+
+}
+
+void Move::HandleMessage(EventMessage message, void * param)
+{
 }
 
 bool Move::IsEnd() const
@@ -48,11 +78,11 @@ bool Move::IsEnd() const
 
 int Move::GetNextState() const
 {
-	return state;
+	return static_cast<int>(state);
 }
 int Move::GetNextAnime() const
 {
-	return Player::Anime::Idle_;
+	return anime;
 }
 
 void Move::LookAtFront(const Vector3 & velocity)

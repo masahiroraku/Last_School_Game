@@ -25,53 +25,26 @@ void Input::RegistFunc() {
 	commandFunc[0] = [&](void)->bool {
 		return (IsKeyBoardDown(KEY_INPUT_ESCAPE)) || (IsGamePadState(XboxGamePad::Start) && IsGamePadState(XboxGamePad::Back)); 
 	}; 
-	//ŽãUŒ‚																		
+	//Œ•UŒ‚																		
 	commandFunc[1] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_J) || IsGamePadDown(XboxGamePad::X);
+		return IsKeyBoardDown(KEY_INPUT_SPACE) || IsGamePadDown(XboxGamePad::X);
 	};
-	//‹­UŒ‚
+	//‘–‚è																		
 	commandFunc[2] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_K) || IsGamePadDown(XboxGamePad::Y);
+		return IsKeyBoardState(KEY_INPUT_LSHIFT) || IsGamePadDown(XboxGamePad::Y);
 	};
-	//‘–‚è
+	//ƒWƒƒƒ“ƒv																		
 	commandFunc[3] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_LSHIFT) || IsGamePadDown(XboxGamePad::Left_Thumb);
+		return IsKeyBoardDown(KEY_INPUT_Z) || IsGamePadDown(XboxGamePad::A);
 	};
-	//ƒK[ƒh
+	//ƒK[ƒh																	
 	commandFunc[4] = [&](void)->bool {
-		return IsKeyBoardState(KEY_INPUT_L) || IsGamePadState(XboxGamePad::Left_Shoulder);
+		return IsKeyBoardState(KEY_INPUT_Q) || IsGamePadState(XboxGamePad::Left_Shoulder);
 	};
-	//‹Ù‹}‰ñ”ð
+	//–î‚ðŽË‚é																
 	commandFunc[5] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_M) || IsGamePadDown(XboxGamePad::B);
+		return IsKeyBoardState(KEY_INPUT_Z) || IsGamePadState(XboxGamePad::Right_Shoulder);
 	};
-
-	//‹ß‹——£•KŽE‹Z
-	commandFunc[6] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_B) || (IsGamePadState(XboxGamePad::Left_Shoulder) && IsGamePadDown(XboxGamePad::X));
-	};
-
-	//‰“‹——£•KŽE‹Z
-	commandFunc[7] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_N) || (IsGamePadState(XboxGamePad::Left_Shoulder) && IsGamePadDown(XboxGamePad::Y));
-	};
-	//ƒhƒŒƒCƒ“E‹z‚¢Žæ‚è
-	commandFunc[8] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_V) ||  IsGamePadState(XboxGamePad::A);
-	};
-	//ƒJƒƒ‰ƒƒbƒNƒIƒ“
-	commandFunc[9] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_Q) || (IsGamePadDown(XboxGamePad::Right_Shoulder));
-	};
-	//Œˆ’èƒ{ƒ^ƒ“
-	commandFunc[10] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_SPACE) || (IsGamePadDown(XboxGamePad::A));
-	};
-	//ƒ|[ƒYƒ{ƒ^ƒ“
-	commandFunc[11] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_P) || (IsGamePadDown(XboxGamePad::Start));
-	};
-
 
 	axisFunc[0] = [&](void)->float {return (IsConnectGamePad() == true) ? GetGamePadLeftStick().y : GetVertical(); };
 	axisFunc[1] = [&](void)->float {return (IsConnectGamePad() == true) ? GetGamePadLeftStick().x : GetHorizontal(); };

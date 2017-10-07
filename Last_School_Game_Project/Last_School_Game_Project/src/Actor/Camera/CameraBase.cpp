@@ -10,10 +10,9 @@ CameraBase::CameraBase(IWorld & world)
 	, matrix()
 	, target(nullptr)
 	, position()
-	, isRockOn(false)
 {
 	//Near Far@‚ðÝ’è
-	SetCameraNearFar(1.0f, 200.0f);
+	SetCameraNearFar(0.1f, 1000.0f);
 }
 
 CameraBase::~CameraBase()
@@ -30,10 +29,6 @@ void CameraBase::SetTarget(const Actor & target)
 	this->target = &target;
 }
 
-bool CameraBase::IsRockOn() const
-{
-	return isRockOn;
-}
 
 bool CameraBase::IsInsideCameraView(const Vector3 & position) const
 {
@@ -48,10 +43,6 @@ std::list<ActorPtr> CameraBase::IsInsideCameraViewActors(ActorGroup group) const
 	}) >> to_list();
 }
 
-ActorPtr CameraBase::GetRockOnTarget() const
-{
-	return rockOnTarget;
-}
 
 void CameraBase::Update(float deltaTime)
 {

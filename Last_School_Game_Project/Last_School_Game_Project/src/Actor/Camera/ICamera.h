@@ -32,14 +32,6 @@ public:
 	/// <param name="target">注目するアクター</param>
 	virtual void SetTarget(const Actor& target) = 0;	
 	/// <summary>
-	/// 今ロックオン中かどうか取得する
-	/// </summary>
-	/// <returns>
-	/// ロックオンしている場合は真
-	/// </returns>
-	virtual bool IsRockOn() const = 0;
-	
-	/// <summary>
 	/// 指定した座標がカメラに映っているかどうか取得する
 	/// </summary>
 	/// <param name="position">映っているか知りたい座標</param>
@@ -57,6 +49,5 @@ public:
 	/// </returns>
 	virtual std::list<ActorPtr> IsInsideCameraViewActors(ActorGroup group) const = 0;
 
-	virtual ActorPtr GetRockOnTarget() const = 0;
 
 };

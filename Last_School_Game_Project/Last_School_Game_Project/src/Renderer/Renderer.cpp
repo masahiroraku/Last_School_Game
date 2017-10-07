@@ -338,14 +338,6 @@ void Renderer::BindAnimationBlendToBone(ModelInfo& info, int animeIndex, float a
 
 
 }
-
-
-
-float Renderer::GetAnimationTime(int animationHandle, int animeIndex)
-{
-	return MV1GetAnimTotalTime(animationHandle, animeIndex);
-}
-
 int Renderer::GetAnimationHandle(Assets::Animation id)
 {
 	return animations[id];
@@ -369,22 +361,6 @@ int Renderer::GetEffectHandle(Assets::Effect id)
 void Renderer::DeleteModel(int modelHandle)
 {
 	MV1DeleteModel(modelHandle);
-}
-
-
-Vector3 Renderer::GetBonePosition(int modelHandle, int boneIndex)
-{
-	return Convert::ToVector3(MV1GetFramePosition(modelHandle, boneIndex));
-}
-
-Matrix4 Renderer::GetBoneLocalMatrix(int modelHandle, int boneIndex)
-{
-	return Convert::ToMatrix4(MV1GetFrameLocalMatrix(modelHandle, boneIndex));
-}
-
-Matrix4 Renderer::GetBoneLocalWorldMatrix(int modelHandle, int boneIndex)
-{
-	return Convert::ToMatrix4(MV1GetFrameLocalWorldMatrix(modelHandle, boneIndex));
 }
 
 int Renderer::GetModelTextureIndex(int modelHandle, int index)

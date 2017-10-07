@@ -22,14 +22,6 @@ public:
 	/// <param name="target">注目するアクター</param>
 	virtual void SetTarget(const Actor& target) override;
 	/// <summary>
-	/// 今ロックオン中かどうか取得する
-	/// </summary>
-	/// <returns>
-	/// ロックオンしている場合は真
-	/// </returns>
-	virtual bool IsRockOn() const override;
-
-	/// <summary>
 	/// 指定した座標がカメラに映っているかどうか取得する
 	/// </summary>
 	/// <param name="position">映っているか知りたい座標</param>
@@ -48,7 +40,6 @@ public:
 	virtual std::list<ActorPtr> IsInsideCameraViewActors(ActorGroup group) const override;
 
 
-	virtual ActorPtr GetRockOnTarget() const override;
 
 
 	/// <summary>
@@ -84,7 +75,4 @@ protected:
 	const Actor* target;
 	//カメラの座標
 	Vector3 position;
-	//ロックオンしているか
-	bool isRockOn;
-	ActorPtr rockOnTarget;
 };

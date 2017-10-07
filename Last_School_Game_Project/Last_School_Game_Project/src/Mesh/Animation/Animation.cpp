@@ -51,3 +51,8 @@ void Animation::SetAnimeID(int animeID)
 {
 	this->animeID = animeID;
 }
+
+int Animation::GetAnimeID() const
+{
+	return animeID;
+}

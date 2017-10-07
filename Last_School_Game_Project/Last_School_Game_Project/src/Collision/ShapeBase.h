@@ -81,6 +81,9 @@ public:
 	/// <returns>[true 衝突した: false 衝突していない]</returns>
 	virtual bool Collide_Line(const ShapeBase& shape, HitInfo& hitInfo);
 	
+	virtual bool Collide_BoundingBox(const ShapeBase& shape, HitInfo& hitInfo);
+	virtual bool Collide_OrientedBoundingBox(const ShapeBase& shape, HitInfo& hitInfo);
+
 	/// <summary>
 	/// 当たり判定をワイヤーフレームで描画
 	/// </summary>

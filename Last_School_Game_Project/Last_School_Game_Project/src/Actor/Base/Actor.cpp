@@ -5,7 +5,7 @@
 #include "World/IWorld.h"
 #include <algorithm>
 #include"Collision/HitInfo.h"
-#include"Collision\BoundingSphere\BoundingSphere.h"
+#include"Collision/BoundingSphere/BoundingSphere.h"
 
 Actor::Actor()
 	:Actor(*world, "none", Vector3(0, 0, 0), std::make_shared<BoundingSphere>())
@@ -19,7 +19,6 @@ Actor::Actor(IWorld& world, const std::string& name, const Vector3& position, Sh
 	, name(name)
 	, matrix()
 	, body(body)
-	, parent(nullptr)
 	, tag(ActorTag::None)
 {
 }
@@ -30,7 +29,6 @@ Actor::Actor(const std::string & name)
 	, name(name)
 	, matrix()
 	, body(nullptr)
-	, parent(nullptr)
 	, tag(ActorTag::None)
 {
 }
@@ -256,7 +254,7 @@ Matrix4 Actor::GetRotate() const
 	return Matrix4(matrix).SetPosition(Vector3::Zero);
 }
 
-const Status Actor::GetStatus() const {
+Status Actor::GetStatus() const {
 	return status;
 }
 
@@ -274,25 +272,14 @@ ActorTag Actor::GetTag() const
 	return tag;
 }
 
+
+
 ShapePtr Actor::GetBody() const
 {
 	return body->Transform(GetMatrix());
 }
 
-int Actor::SetID(int id)
-{
-	return this->id = id;
-}
 
-int Actor::GetID() const
-{
-	return id;
-}
-
-const Actor & Actor::GetParent() const
-{
-	return *parent;
-}
 
 std::forward_list<ActorPtr>& Actor::GetChildren(){
 	return children;

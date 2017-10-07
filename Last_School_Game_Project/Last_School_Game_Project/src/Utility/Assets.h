@@ -16,12 +16,25 @@ namespace Assets {
 	enum class Model {
 		//!プレイヤー
 		Player,
-		//!ボス
-		Boss,
+		//!ボスのドラゴン
+		BoarDragon,
 		//!ステージ
 		Stage,
 		//!あたり判定用のステージ
 		CollisionStage,
+		//!プレイヤーが装備する剣
+		Sword,
+		//!プレイヤーが装備する盾
+		Shield,
+		//!スカイボックス
+		Skybox,
+		//!ステージの柱
+		Pillar,
+		//!弓
+		Bow,
+		//!矢
+		Arrow
+
 	};
 	/**
 	* @enum Animation
@@ -30,8 +43,8 @@ namespace Assets {
 	enum class Animation {
 		//!プレイヤーのアニメーション
 		Player,
-		//ボスのアニメーション
-		Boss
+		//!ボスのドラゴン
+		BoarDragon,
 	};
 	/**
 	* @enum Texture
@@ -41,7 +54,7 @@ namespace Assets {
 		//!フェード用
 		Fade,
 		//!ボスモデルのテクスチャ
-		BossTexture,
+		BoarDragonTexture,
 		//!ゲームメインで使うUI　：　ロックオン
 		GameMainUI_RockOn,
 	};

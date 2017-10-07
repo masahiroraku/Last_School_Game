@@ -11,6 +11,8 @@
 #include<unordered_map>
 #include<functional>
 
+enum class EventMessage;
+
 /*! @class StateManager
 *   @brief 状態クラスを管理するクラス
 */
@@ -21,9 +23,13 @@ public:
 	StateManager();
 	~StateManager();
 	void Update(float deltaTime);
+	void HandleMessage(EventMessage message, void* param);
 	void Add(int id, const IStatePtr& state);
 	void Change(int id, int motion = 0);
 	void SetChangeFunc(const Function& func);
+	int GetState() const;
+	int GetStateNum() const;
+	void Reset();
 private:
 	//!コピー禁止
 	StateManager(const StateManager& other) = delete;

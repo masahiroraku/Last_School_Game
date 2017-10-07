@@ -5,6 +5,8 @@ class Line;
 class Capsule;
 class BoundingSphere;
 class HitInfo;
+class BoundingBox;
+class OrientedBoundingBox;
 
 /**
  * @file Collision.h
@@ -75,7 +77,7 @@ public:
 	/// <param name="hitInfo">衝突情報</param>
 	/// <returns>[true 衝突した: false 衝突していない]</returns>
 	static bool Line_Line(const Line& line1, const Line& line2, HitInfo& hitInfo);
-	/// <summary>
+		/// <summary>
 	/// ステージと線分のあたり判定
 	/// </summary>
 	/// <param name="modelID">あたり判定を行うモデルのハンドル</param>

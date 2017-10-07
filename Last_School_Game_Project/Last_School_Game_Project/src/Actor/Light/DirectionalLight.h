@@ -16,7 +16,7 @@
 class DirectionalLight : public ILight
 {
 public:
-	DirectionalLight(const Vector3& position,const Vector3& direction);
+	DirectionalLight(const Vector3& direction);
 	~DirectionalLight();
 
 private:

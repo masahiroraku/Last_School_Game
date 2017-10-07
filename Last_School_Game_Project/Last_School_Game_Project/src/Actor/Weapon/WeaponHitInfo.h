@@ -17,32 +17,26 @@
 struct WeaponHitInfo
 {
 	//!タグ
-	ActorTag actorTag;
+	ActorTag tag;
 	//!与えるダメージ
 	int damage;
-	//!当たった座標
-	Vector3 hitPosition;
-	
 	/// <summary>
 	/// デフォルトコンストラクタ
 	/// </summary>
 	WeaponHitInfo()
-		: actorTag(ActorTag::None)
+		: tag(ActorTag::None)
 		, damage(0)
-		, hitPosition(Vector3::Zero)
 	{
 
 	}	
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	/// <param name="actorTag">タグ</param>
+	/// <param name="tag">タグ</param>
 	/// <param name="damage">与えるダメージ</param>
-	/// <param name="hitPosition">接触点</param>
-	WeaponHitInfo(ActorTag actorTag, int damage, const Vector3& hitPosition = Vector3::Zero)
-		: actorTag(actorTag)
+	WeaponHitInfo(ActorTag tag, int damage)
+		: tag(tag)
 		, damage(damage)
-		, hitPosition(hitPosition)
 	{
 
 	}

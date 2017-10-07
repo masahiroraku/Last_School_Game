@@ -8,6 +8,7 @@ World::World()
 	: actorManager()
 	, camera()
 	, field()
+	, light()
 	, listener([](EventMessage, void*) {}) {
 }
 
@@ -24,7 +25,7 @@ void World::Update(float deltaTime) {
 
 void World::Draw(Renderer& renderer) {
 	camera->Draw(renderer);
-	//field->Draw(renderer);
+	field->Draw(renderer);
 	actorManager.Draw(renderer);
 
 }
@@ -39,6 +40,16 @@ void World::AddCamera(const CameraPtr& camera) {
 
 ICamera& World::GetCamera() {
 	return *camera;
+}
+
+void World::AddLight(const LightPtr & light)
+{
+	this->light = light;
+}
+
+ILight & World::GetLight() const
+{
+	return *light;
 }
 
 void World::AddField(const FieldPtr & field) {

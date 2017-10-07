@@ -6,6 +6,8 @@
 #include"Actor/Status/HitPoint/HitPoint.h"
 #include"Utility/Timer/Timer.h"
 #include "Collision/ShapePtr.h"
+#include"Collision/BoundingSphere/BoundingSphere.h"
+
 /************************************************************
 * File Name	: Camera.h
 * Description	: 3D空間を映すカメラ
@@ -30,11 +32,21 @@ private:
 	void CalcYawPitch(float deltaTime);
 	void Rotate();
 	void RotateRockOn();
-	void LookAtBoss();
 
 	void SearchRockOnActor();
 
 private:
+	enum class State {
+		//!通常状態　注視点をグルグル
+		Default,
+		//!ロックオン状態
+		LockOn,
+		//!構えている状態
+		Aim
+	};
+
+private:
+	SimpleMesh skybox;
 	//回転用のヨー（Z軸回転）
 	float yaw;
 	//回転用のピッチ（Y軸回転）
@@ -69,9 +81,8 @@ private:
 	const float UnRockOnDistance;
 
 	//あたり判定
-	ShapePtr body;
-
-	Actor* bossPtr;
-	bool isLookAtBoss;
+	BoundingSphere body;
+	State state;
+	Actor* lockOnTarget;
 
 };

@@ -15,6 +15,9 @@
 #include"Effect/EffectManager.h"
 #include"Utility/Utility.h"
 #include"Actor/Player/Player.h"
+#include"Actor/Boss/BoarDragon/BoarDragon.h"
+#include"Actor/Light/DirectionalLight.h"
+#include"Actor/Pillar/Pillar.h"
 
 GameMainScene::GameMainScene(WorldPtr& world)
 	: isEnd_(false)
@@ -38,10 +41,21 @@ void GameMainScene::LoadAssets()
 
 	renderer->Load3DModel(Assets::Model::Player, "Player/player.mv1");
 	renderer->LoadAnimation(Assets::Animation::Player, "Player/playerAnime.mv1");
-	renderer->Load3DModel(Assets::Model::Boss, "Bosses/dragon.mv1");
-	renderer->LoadAnimation(Assets::Animation::Boss, "Bosses/dragonAnime.mv1");
+	renderer->Load3DModel(Assets::Model::BoarDragon, "Bosses/BoarDragon.mv1");
+	renderer->LoadAnimation(Assets::Animation::BoarDragon, "Bosses/BoarDragonAnime.mv1");
+
+	renderer->Load3DModel(Assets::Model::Stage, "Stages/Stage.mv1");
+	renderer->Load3DModel(Assets::Model::CollisionStage, "Stages/Stage.mv1");
+	renderer->Load3DModel(Assets::Model::Pillar, "Stages/Pillar.mv1");
+
+	renderer->Load3DModel(Assets::Model::Sword, "Weapons/sword.mv1");
+	renderer->Load3DModel(Assets::Model::Shield, "Weapons/shield.mv1");
+
+	renderer->Load3DModel(Assets::Model::Bow, "Weapons/bow.mv1");
+	renderer->Load3DModel(Assets::Model::Arrow, "Weapons/arrow.mv1");
 
 
+	renderer->Load3DModel(Assets::Model::Skybox, "Skyboxes/skybox.mv1");
 
 #ifdef NDEBUG
 	Sound::GetInstance().PlayBGM(Assets::Sound::BGM_GameMain);
@@ -56,13 +70,16 @@ void GameMainScene::Initialize() {
 
 	world->Initialize();
 	world->AddCamera(std::make_shared<Camera>(*world));
-	//world->AddField(std::make_shared<Field>(renderer->GetModelHandle(Assets::Model::CollisionStage)));
+	world->AddField(std::make_shared<Field>(renderer->GetModelHandle(Assets::Model::CollisionStage)));
+	world->AddLight(std::make_shared<DirectionalLight>(Vector3(0,-1,1)));
 
 	ActorPtr player = std::make_shared<Player>(*world, Vector3(0, 0, 0));
 	world->AddActor(ActorGroup::Player, player);
 
-	//ActorPtr boss = std::make_shared<Boss>(*world, Vector3(0,0,8), *player);
-	//world->AddActor(ActorGroup::Enemy, boss);
+	ActorPtr boss = std::make_shared<BoarDragon>(*world, Vector3(0,0,8), *player);
+	world->AddActor(ActorGroup::Enemy, boss);
+
+	world->AddActor(ActorGroup::Stage, std::make_shared<Pillar>(*world, Vector3(20,0,0)));
 
 	//world->AddActor(ActorGroup::UI, std::make_shared<PlayerStatus>(static_cast<Player&>(*player.get())));
 	//world->AddActor(ActorGroup::UI, std::make_shared<BossStatus>(static_cast<EnemyBase&>(*boss.get())));

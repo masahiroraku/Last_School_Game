@@ -74,7 +74,7 @@ public:
 	/// <returns>
 	/// ２点間の距離
 	/// </returns>
-	float Distance(const Vector3& vec);
+	float Distance(const Vector3& vec) const;
 	
 	/// <summary>
 	/// ２点間の距離の　二乗　を求める
@@ -83,7 +83,7 @@ public:
 	/// <returns>
 	/// ２点間の距離の　二乗
 	/// </returns>
-	float DistanceSquare(const Vector3& vec);
+	float DistanceSquare(const Vector3& vec) const;
 
 	/// <summary>
 	/// 2つのベクトルの角度を求める

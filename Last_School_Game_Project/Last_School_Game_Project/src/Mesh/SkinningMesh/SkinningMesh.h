@@ -83,6 +83,11 @@ public:
 	/// </summary>
 	void Clear();
 
+	Vector3 GetBonePosition(int boneIndex) const;
+	Matrix4 GetBoneLocalMatrix(int boneIndex) const;
+	Matrix4 GetBoneWorldMatrix(int boneIndex) const;
+
+
 	//-------------ÉRÉsÅ[ã÷é~---------------
 public:
 	SkinningMesh(const SkinningMesh& other) = delete;

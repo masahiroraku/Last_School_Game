@@ -77,13 +77,13 @@ void Vector3::Clamp(const Vector3 & min, const Vector3 & max)
 }
 
 
-float Vector3::Distance(const Vector3 & vec)
+float Vector3::Distance(const Vector3 & vec) const
 {
 	return (vec - Vector3(x, y, z)).Length();
 }
 
 
-float Vector3::DistanceSquare(const Vector3 & vec)
+float Vector3::DistanceSquare(const Vector3 & vec) const
 {
 	return (vec - Vector3(x, y, z)).SquareLength();
 }

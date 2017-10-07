@@ -2,10 +2,12 @@
 #include "Actor/State/IState.h"
 #include"Actor/Base/Actor.h"
 class ICamera;
+#include"Player.h"
+
 class Move : public IState
 {
 public:
-	Move(Actor& player, ICamera& camera);
+	Move(Actor& player, ICamera& camera, SkinningMesh& meshPtr);
 	~Move();
 private:
 	/// <summary>
@@ -18,6 +20,13 @@ private:
 	/// </summary>
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) override;
+	/// <summary>
+	/// アクターのメッセージを受け取る
+	/// </summary>
+	/// <param name="message">メッセージの種類</param>
+	/// <param name="param">メッセージと一緒に送られる情報</param>
+	virtual void HandleMessage(EventMessage message, void* param) override;
+
 	/// <summary>
 	/// 次の状態に遷移するかどうか
 	/// </summary>
@@ -44,7 +53,9 @@ private:
 	bool isEnd;
 	ICamera& camera;
 	Actor& player;
-	int state;
+	SkinningMesh& meshPtr;
+	Player::State state;
+	Player::Anime anime;
 	const float WalkSpeed;
 	const float RunSpeed;
 	float speed;

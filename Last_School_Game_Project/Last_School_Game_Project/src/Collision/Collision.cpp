@@ -7,6 +7,8 @@
 #include"Math/Math.h"
 #include"Math/Convert/Convert.h"
 #include<cassert>
+#include"Collision/BoundingBox/BoundingBox.h"
+#include"Collision/OrientedBoundingBox/OrientedBoundingBox.h"
 
 void Collision::SetUpOctree(unsigned int modelID, int XDivNum, int YDivNum, int ZDivNum)
 {

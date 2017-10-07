@@ -196,13 +196,6 @@ public:
 	*/
 	void BindAnimationBlendToBone(ModelInfo& info, int animeIndex, float animeTime00, float animeTime01, int boneIndex);	
 	/**
-	* @brief アニメーションの再生時間を取得する
-	* @param animationHandle アニメーションのハンドル
-	* @param animeIndex アニメーションの番号
-	* @return アニメーションの再生時間
-	*/
-	float GetAnimationTime(int animationHandle, int animeIndex);
-	/**
 	* @brief アニメーションのハンドルを取得
 	* @param id 登録した名前
 	* @return アニメーションのハンドル
@@ -232,27 +225,6 @@ public:
 	*/
 	void DeleteModel(int modelHandle);
 	/**
-	* @brief ボーンのワールド座標を取得
-	* @param modelHandle モデルのハンドル
-	* @param boneIndex ボーン番号
-	* @return ボーンのワールド座標
-	*/
-	Vector3 GetBonePosition(int modelHandle, int boneIndex);
-	/**
-	* @brief ボーンのローカル行列を取得
-	* @param modelHandle モデルのハンドル
-	* @param boneIndex ボーン番号
-	* @return ボーンのローカル行列
-	*/
-	Matrix4 GetBoneLocalMatrix(int modelHandle, int boneIndex);
-	/**
-	* @brief ボーンのワールド行列を取得
-	* @param modelHandle モデルのハンドル
-	* @param boneIndex ボーン番号
-	* @return ボーンのワールド行列
-	*/
-	Matrix4 GetBoneLocalWorldMatrix(int modelHandle, int boneIndex);
-	/**
 	* @brief ディフューズマップとして使用されているテクスチャ番号を取得する
 	* @param modelHandle モデルのID・ハンドル
 	* @param index マテリアルの番号
@@ -276,7 +248,6 @@ public:
 	* @return 再生中かどうか[true 再生中: false 再生していない]
 	*/
 	bool IsPlayEffect3D(int effectHandle);
-
 private:
 	//!モデル情報を管理するコンテナ
 	std::unordered_map<Assets::Model, int> models;

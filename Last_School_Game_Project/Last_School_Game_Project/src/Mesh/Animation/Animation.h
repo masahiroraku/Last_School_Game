@@ -56,6 +56,7 @@ public:
 	/// </summary>
 	/// <param name="animeID">参照するアニメーションのID・ハンドル</param>
 	void SetAnimeID(int animeID);
+	int GetAnimeID()const;
 
 private:
 	//!アニメーションのID・ハンドル

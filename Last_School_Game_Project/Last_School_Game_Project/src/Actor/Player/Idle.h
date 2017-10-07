@@ -1,5 +1,6 @@
 #pragma once
 #include "Actor/State/IState.h"
+#include"Player.h"
 
 class Idle : public IState{
 public:
@@ -16,6 +17,13 @@ private:
 	/// </summary>
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) override;
+	/// <summary>
+	/// アクターのメッセージを受け取る
+	/// </summary>
+	/// <param name="message">メッセージの種類</param>
+	/// <param name="param">メッセージと一緒に送られる情報</param>
+	virtual void HandleMessage(EventMessage message, void* param) override;
+
 	/// <summary>
 	/// 次の状態に遷移するかどうか
 	/// </summary>
@@ -34,6 +42,8 @@ private:
 	/// <returns>次に再生するアニメーション番号</returns>
 	virtual int GetNextAnime() const override;
 private:
+	Player::State state;
+	Player::Anime anime;
 	bool isEnd;
 };
 

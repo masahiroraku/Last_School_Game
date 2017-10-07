@@ -87,7 +87,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)/Library/Dxlib;$(ProjectDir)/Library/Effekseer/include;$(ProjectDir)/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(ProjectDir)/Library/Dxlib;$(ProjectDir)/Library/Effekseer/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -112,13 +117,32 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)/Library/Dxlib;$(ProjectDir)/Library/Effekseer/include;$(ProjectDir)/src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(ProjectDir)/Library/Dxlib;$(ProjectDir)/Library/Effekseer/lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BiteAttack\BiteAttack.cpp" />
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Attack.cpp" />
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Damage.cpp" />
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Dead.cpp" />
+    <ClCompile Include="src\Actor\Pillar\Pillar.cpp" />
+    <ClCompile Include="src\Actor\Player\BowAttack.cpp" />
+    <ClCompile Include="src\Actor\Player\Damage.cpp" />
+    <ClCompile Include="src\Actor\Player\Dead.cpp" />
+    <ClCompile Include="src\Actor\Player\Guard.cpp" />
+    <ClCompile Include="src\Actor\Weapon\Arrow\Arrow.cpp" />
+    <ClCompile Include="src\Actor\Weapon\Bow\Bow.cpp" />
+    <ClCompile Include="src\Actor\Weapon\Shield\Shield.cpp" />
+    <ClCompile Include="src\Actor\Base\ActorUtility.cpp" />
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon.cpp" />
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Idle.cpp" />
+    <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Move.cpp" />
     <ClCompile Include="src\Actor\Player\Move.cpp" />
     <ClCompile Include="src\Actor\Player\Idle.cpp" />
     <ClCompile Include="src\Actor\Light\DirectionalLight.cpp" />
@@ -130,22 +154,26 @@
     <ClCompile Include="src\Actor\Field\Field.cpp" />
     <ClCompile Include="src\Actor\State\StateManager.cpp" />
     <ClCompile Include="src\Actor\Status\HitPoint\HitPoint.cpp" />
+    <ClCompile Include="src\Actor\Weapon\Sword\Sword.cpp" />
     <ClCompile Include="src\Application\FPS\FPS.cpp" />
     <ClCompile Include="src\Application\GameApplication\GameApplication.cpp" />
     <ClCompile Include="src\Application\GameFrame\GameFrame.cpp" />
     <ClCompile Include="src\Application\LoadData\LoadData.cpp" />
     <ClCompile Include="src\Application\Screen\Screen.cpp" />
+    <ClCompile Include="src\Collision\BoundingBox\BoundingBox.cpp" />
     <ClCompile Include="src\Collision\BoundingSphere\BoundingSphere.cpp" />
     <ClCompile Include="src\Collision\Capsule\Capsule.cpp" />
     <ClCompile Include="src\Collision\Collision.cpp" />
     <ClCompile Include="src\Collision\CollisionMesh\CollisionMesh.cpp" />
     <ClCompile Include="src\Collision\CollisionMesh\CollisionTriangle.cpp" />
     <ClCompile Include="src\Collision\Line\Line.cpp" />
+    <ClCompile Include="src\Collision\OrientedBoundingBox\OrientedBoundingBox.cpp" />
     <ClCompile Include="src\Collision\ShapeBase.cpp" />
     <ClCompile Include="src\Effect\Effect3D\Effect3D.cpp" />
     <ClCompile Include="src\Effect\EffectManager.cpp" />
     <ClCompile Include="src\Input\Input.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Math\Bezier\Bezier.cpp" />
     <ClCompile Include="src\Math\Convert\Convert.cpp" />
     <ClCompile Include="src\Math\Math.cpp" />
     <ClCompile Include="src\Math\Matrix4\Matrix4.cpp" />
@@ -168,8 +196,29 @@
     <ClCompile Include="src\Utility\Random\Random.cpp" />
     <ClCompile Include="src\Utility\Timer\Timer.cpp" />
     <ClCompile Include="src\World\World.cpp" />
+    <ClCompile Include="src\Actor\Player\SwordAttack.cpp" />
+    <ClCompile Include="src\Actor\Player\SwordCombo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Actor\Base\ActorTag.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BiteAttack\BiteAttack.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Attack.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Damage.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Dead.h" />
+    <ClInclude Include="src\Actor\Pillar\Pillar.h" />
+    <ClInclude Include="src\Actor\Player\BowAttack.h" />
+    <ClInclude Include="src\Actor\Player\Damage.h" />
+    <ClInclude Include="src\Actor\Player\Dead.h" />
+    <ClInclude Include="src\Actor\Player\Guard.h" />
+    <ClInclude Include="src\Actor\UI\BossStatus\BossStatus.h" />
+    <ClInclude Include="src\Actor\UI\PlayerStatus\PlayerStatus.h" />
+    <ClInclude Include="src\Actor\Weapon\Arrow\Arrow.h" />
+    <ClInclude Include="src\Actor\Weapon\Bow\Bow.h" />
+    <ClInclude Include="src\Actor\Weapon\Shield\Shield.h" />
+    <ClInclude Include="src\Actor\Base\ActorUtility.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Idle.h" />
+    <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Move.h" />
     <ClInclude Include="src\Actor\Player\Move.h" />
     <ClInclude Include="src\Actor\Player\Idle.h" />
     <ClInclude Include="src\Actor\Light\DirectionalLight.h" />
@@ -180,7 +229,6 @@
     <ClInclude Include="src\Actor\Base\ActorGroup.h" />
     <ClInclude Include="src\Actor\Base\ActorManager.h" />
     <ClInclude Include="src\Actor\Base\ActorPtr.h" />
-    <ClInclude Include="src\Actor\Base\ActorTag.h" />
     <ClInclude Include="src\Actor\Base\EventMessage.h" />
     <ClInclude Include="src\Actor\Base\Status.h" />
     <ClInclude Include="src\Actor\Camera\Camera.h" />
@@ -194,6 +242,7 @@
     <ClInclude Include="src\Actor\State\IStatePtr.h" />
     <ClInclude Include="src\Actor\State\StateManager.h" />
     <ClInclude Include="src\Actor\Status\HitPoint\HitPoint.h" />
+    <ClInclude Include="src\Actor\Weapon\Sword\Sword.h" />
     <ClInclude Include="src\Actor\Weapon\WeaponHitInfo.h" />
     <ClInclude Include="src\Application\FPS\FPS.h" />
     <ClInclude Include="src\Application\GameApplication\GameApplication.h" />
@@ -202,6 +251,7 @@
     <ClInclude Include="src\Application\LoadData\LoadDataKey.h" />
     <ClInclude Include="src\Application\LoadData\LoadDataValue.h" />
     <ClInclude Include="src\Application\Screen\Screen.h" />
+    <ClInclude Include="src\Collision\BoundingBox\BoundingBox.h" />
     <ClInclude Include="src\Collision\BoundingSphere\BoundingSphere.h" />
     <ClInclude Include="src\Collision\Capsule\Capsule.h" />
     <ClInclude Include="src\Collision\Collision.h" />
@@ -209,6 +259,7 @@
     <ClInclude Include="src\Collision\CollisionMesh\CollisionTriangle.h" />
     <ClInclude Include="src\Collision\HitInfo.h" />
     <ClInclude Include="src\Collision\Line\Line.h" />
+    <ClInclude Include="src\Collision\OrientedBoundingBox\OrientedBoundingBox.h" />
     <ClInclude Include="src\Collision\ShapeBase.h" />
     <ClInclude Include="src\Collision\ShapePtr.h" />
     <ClInclude Include="src\Collision\ShapeType.h" />
@@ -218,6 +269,7 @@
     <ClInclude Include="src\Input\Command.h" />
     <ClInclude Include="src\Input\GamePad.h" />
     <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Math\Bezier\Bezier.h" />
     <ClInclude Include="src\Math\Convert\Convert.h" />
     <ClInclude Include="src\Math\Ease\Ease.h" />
     <ClInclude Include="src\Math\Math.h" />
@@ -255,6 +307,8 @@
     <ClInclude Include="src\World\IWorld.h" />
     <ClInclude Include="src\World\World.h" />
     <ClInclude Include="src\World\WorldPtr.h" />
+    <ClInclude Include="src\Actor\Player\SwordAttack.h" />
+    <ClInclude Include="src\Actor\Player\SwordCombo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

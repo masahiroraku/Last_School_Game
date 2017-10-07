@@ -10,6 +10,7 @@
 #include"Actor/Base/Actor.h"
 #include"Mesh/SkinningMesh/SkinningMesh.h"
 #include"Actor/State/StateManager.h"
+#include"Actor/Status/HitPoint/HitPoint.h"
 class ICamera;
 
  /*! @class Player
@@ -22,6 +23,9 @@ public:
 		Move,
 		Damage,
 		Dead,
+		SwordAttack,
+		Guard,
+		BowAttack,
 		Max_State_Num
 	};
 	enum Anime {
@@ -29,7 +33,19 @@ public:
 		Walk_,
 		Run_,
 		Damage_,
-		Dead_
+		Dead_,
+		Climb_,
+		Fall_,
+		Fall_Stand_,
+		Guard_Start_,
+		Guard_,
+		Guard_End_,
+		Aim_Walk_,
+		Aim_OverDraw_,
+		Aim_Recoil_,
+		Draw_Sword_,
+		Slash_00_,
+		Slash_01_,
 	};
 public:
 	Player(IWorld& world, const Vector3& position);
@@ -42,9 +58,10 @@ private:
 	virtual void OnMessage(EventMessage message, void* param = nullptr) override;
 private:
 	SkinningMesh mesh;
-	State state;
-
 	ICamera* camera;
 	StateManager stateManager;
+	bool isGround;
+public:
+	HitPoint hp;
 };
 
