@@ -131,6 +131,7 @@
     <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Attack.cpp" />
     <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Damage.cpp" />
     <ClCompile Include="src\Actor\Boss\BoarDragon\BoarDragon_Dead.cpp" />
+    <ClCompile Include="src\Actor\Camera\FreeLookAtCamera.cpp" />
     <ClCompile Include="src\Actor\Pillar\Pillar.cpp" />
     <ClCompile Include="src\Actor\Player\BowAttack.cpp" />
     <ClCompile Include="src\Actor\Player\Damage.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Attack.h" />
     <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Damage.h" />
     <ClInclude Include="src\Actor\Boss\BoarDragon\BoarDragon_Dead.h" />
+    <ClInclude Include="src\Actor\Camera\FreeLookAtCamera.h" />
     <ClInclude Include="src\Actor\Pillar\Pillar.h" />
     <ClInclude Include="src\Actor\Player\BowAttack.h" />
     <ClInclude Include="src\Actor\Player\Damage.h" />

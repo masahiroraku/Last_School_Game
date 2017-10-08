@@ -31,11 +31,11 @@ void Input::RegistFunc() {
 	};
 	//走り																		
 	commandFunc[2] = [&](void)->bool {
-		return IsKeyBoardState(KEY_INPUT_LSHIFT) || IsGamePadDown(XboxGamePad::Y);
+		return IsKeyBoardState(KEY_INPUT_LSHIFT) || IsGamePadState(XboxGamePad::A);
 	};
 	//ジャンプ																		
 	commandFunc[3] = [&](void)->bool {
-		return IsKeyBoardDown(KEY_INPUT_Z) || IsGamePadDown(XboxGamePad::A);
+		return IsKeyBoardDown(KEY_INPUT_Z) || IsGamePadDown(XboxGamePad::Y);
 	};
 	//ガード																	
 	commandFunc[4] = [&](void)->bool {

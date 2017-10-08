@@ -18,6 +18,7 @@
 #include"Actor/Boss/BoarDragon/BoarDragon.h"
 #include"Actor/Light/DirectionalLight.h"
 #include"Actor/Pillar/Pillar.h"
+#include"Actor/Camera/FreeLookAtCamera.h"
 
 GameMainScene::GameMainScene(WorldPtr& world)
 	: isEnd_(false)
@@ -69,7 +70,8 @@ void GameMainScene::Initialize() {
 
 
 	world->Initialize();
-	world->AddCamera(std::make_shared<Camera>(*world));
+	//world->AddCamera(std::make_shared<Camera>(*world));
+	world->AddCamera(std::make_shared<FreeLookAtCamera>(*world));
 	world->AddField(std::make_shared<Field>(renderer->GetModelHandle(Assets::Model::CollisionStage)));
 	world->AddLight(std::make_shared<DirectionalLight>(Vector3(0,-1,1)));
 

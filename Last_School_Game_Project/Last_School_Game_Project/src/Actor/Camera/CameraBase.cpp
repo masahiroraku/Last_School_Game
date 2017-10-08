@@ -10,6 +10,7 @@ CameraBase::CameraBase(IWorld & world)
 	, matrix()
 	, target(nullptr)
 	, position()
+	, pivot()
 {
 	//Near Far@‚ğİ’è
 	SetCameraNearFar(0.1f, 1000.0f);

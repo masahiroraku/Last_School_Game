@@ -75,4 +75,6 @@ protected:
 	const Actor* target;
 	//ƒJƒƒ‰‚ÌÀ•W
 	Vector3 position;
+	//!‰ñ“]‚·‚éŠî€‚Ìs—ñ
+	Matrix4 pivot;
 };
