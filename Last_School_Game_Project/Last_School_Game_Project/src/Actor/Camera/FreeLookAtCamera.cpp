@@ -2,82 +2,57 @@
 #include"Actor/Base/Actor.h"
 #include"Input/Input.h"
 #include"Math/Convert/Convert.h"
-
+#include"Utility/Utility.h"
+#include"DefaultCameraState.h"
+#include"AimCameraState.h"
 FreeLookAtCamera::FreeLookAtCamera(IWorld & world)
 	: CameraBase(world)
-	, skybox(Assets::Model::Skybox)
-	, moveSpeed(0.1f)
-	, turnSpeed(1.5f)
-	, tiltMax(75.0f)
-	, tiltMin(45.0f)
+	, skybox(Assets::Model::Skybox,false)
 	, lookDistance(10.0f)
-	, localPosition(0,5,-8)
-	, lookAngle(0.0f)
-	, tiltAngle(0.0f)
-	, pivotEulers()
-	, pivotTargetRotate()
-	, transformTargetRotate()
+	, stateManager()
+	, lookat()
 {
-	//pivotEulers = pivot.GetRotateAngle_Degree();
-	//pivotTargetRotate = pivot.GetRotation();
-	//transformTargetRotate = matrix.GetRotation();
-
-	//カメラ位置と注視点を設定
-	SetCameraPositionAndTargetAndUpVec(
-		Convert::ToVECTOR(localPosition),
-		Convert::ToVECTOR(Vector3(0,1,0)),
-		Convert::ToVECTOR(matrix.GetUp())
-	);
 }
 
 FreeLookAtCamera::~FreeLookAtCamera()
 {
 }
 
-void FreeLookAtCamera::OnUpdate(float deltaTime)
+void FreeLookAtCamera::OnInitialize()
 {
-	//RotationMovement(deltaTime);
-
-	position = position.Lerp(target->GetPosition(),moveSpeed * deltaTime);
-
-	Vector3 lookat = target->GetPosition() - (position + localPosition);
-	lookat.y = 0.0f;
-	matrix = Matrix4::CreateLookAt(position + localPosition, -lookat, matrix.GetUp());
-
+	stateManager.Add(static_cast<int>(State::Default), std::make_shared<DefaultCameraState>(matrix,lookat, *target));
+	stateManager.Add(static_cast<int>(State::Aim), std::make_shared<AimCameraState>(matrix,lookat, *target));
+	stateManager.Change(static_cast<int>(State::Default));
+	
+	lookat = target->GetPosition() + Vector3(0, 1, 0);
 	//カメラ位置と注視点を設定
 	SetCameraPositionAndTargetAndUpVec(
 		Convert::ToVECTOR(matrix.GetPosition()),
-		Convert::ToVECTOR(target->GetPosition() + Vector3(0,1,0)),
+		Convert::ToVECTOR(lookat),
+		Convert::ToVECTOR(matrix.GetUp())
+	);
+
+}
+
+void FreeLookAtCamera::OnUpdate(float deltaTime)
+{
+	stateManager.Update(deltaTime);
+	
+	//カメラ位置と注視点を設定
+	SetCameraPositionAndTargetAndUpVec(
+		Convert::ToVECTOR(matrix.GetPosition()),
+		Convert::ToVECTOR(lookat),
 		Convert::ToVECTOR(matrix.GetUp())
 	);
 }
 
 void FreeLookAtCamera::OnDraw(Renderer & renderer)
 {
-	skybox.Draw(renderer, Matrix4::Translate(position));
+	skybox.Draw(renderer, Matrix4::Translate(matrix.GetPosition()));
 }
 
 void FreeLookAtCamera::OnMessage(EventMessage message, void * param)
 {
+	stateManager.HandleMessage(message, param);
 }
 
-void FreeLookAtCamera::RotationMovement(float deltaTime)
-{
-	//入力された横軸の数値を取得
-	float x = Input::GetInstance().GetAxis(Axis::Horizontal2) * deltaTime;
-	//入力された縦軸の数値を取得
-	float y = -Input::GetInstance().GetAxis(Axis::Vertical2) * deltaTime;
-
-	lookAngle += x * turnSpeed;
-
-	transformTargetRotate = Quaternion(0, lookAngle, 0.0f);
-
-	tiltAngle -= y * turnSpeed;
-	tiltAngle = Math::Clamp(tiltAngle, -tiltMin, tiltMax);
-
-	pivotTargetRotate = Quaternion(tiltAngle, pivotEulers.y, pivotEulers.z);
-
-	pivot = pivotTargetRotate.ToRotateMatrix();
-	matrix = transformTargetRotate.ToRotateMatrix();
-
-}

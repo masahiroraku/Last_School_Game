@@ -47,6 +47,10 @@ public:
 	/// </summary>
 	void Finalize();	
 	/// <summary>
+	/// 登録したアクターを全削除
+	/// </summary>
+	void Clear();
+	/// <summary>
 	/// カメラを追加
 	/// </summary>
 	/// <param name="camera">カメラのポインタ</param>

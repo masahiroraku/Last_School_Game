@@ -40,5 +40,17 @@ public:
 	static void PrintDxVector3(const Vector3& position) {
 		printfDx("X = %0.2f, Y = %0.2f, Z = %0.2f\n", position.x, position.y, position.z);
 	}
+	static void DrawXYZ(const Matrix4& matrix, const Vector3& position = Vector3::Zero) {
+		Vector3 p;
+		if (position.Length() <= 0.0f) {
+			p = matrix.GetPosition();
+		}
+		else {
+			p = position;
+		}
+		DrawLine3D(Convert::ToVECTOR(p + Vector3(0,1,0)), Convert::ToVECTOR((p + Vector3(0,1,0) + -matrix.GetFront())), GetColor(0, 0, 255));
+		DrawLine3D(Convert::ToVECTOR(p + Vector3(0,1,0)), Convert::ToVECTOR((p + Vector3(0,1,0) + matrix.GetLeft())), GetColor(255, 0, 0));
+		DrawLine3D(Convert::ToVECTOR(p + Vector3(0,1,0)), Convert::ToVECTOR((p + Vector3(0,1,0) + matrix.GetUp())), GetColor(0, 255, 0));
+	}
 
 };

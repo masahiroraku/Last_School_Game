@@ -27,6 +27,10 @@ void Dead::Update(float deltaTime)
 	}
 }
 
+void Dead::Finalize()
+{
+}
+
 void Dead::HandleMessage(EventMessage message, void * param)
 {
 }

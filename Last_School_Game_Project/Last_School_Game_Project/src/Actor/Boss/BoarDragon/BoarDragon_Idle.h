@@ -4,7 +4,7 @@
 
 class BoarDragon_Idle : public IState {
 public:
-	BoarDragon_Idle();
+	BoarDragon_Idle(Actor& playerPtr,Actor& bossPtr);
 	~BoarDragon_Idle();
 private:
 	/// <summary>
@@ -17,6 +17,11 @@ private:
 	/// </summary>
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) override;
+	/// <summary>
+	/// 状態の終了
+	/// </summary>
+	virtual void Finalize() override;
+
 	/// <summary>
 	/// アクターのメッセージを受け取る
 	/// </summary>
@@ -44,5 +49,7 @@ private:
 	bool isEnd;
 	BoarDragon::State state;
 	BoarDragon::Anime anime;
+	Actor& playerPtr;
+	Actor& bossPtr;
 };
 

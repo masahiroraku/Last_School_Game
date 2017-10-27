@@ -19,14 +19,19 @@ public:
 	/// </summary>
 	virtual ~IState() {}
 	/// <summary>
-	/// 初期化
+	/// 状態の初期化
 	/// </summary>
 	virtual void Initialize() = 0;
 	/// <summary>
 	/// 状態の更新
 	/// </summary>
 	/// <param name="deltaTime">１フレーム</param>
-	virtual void Update(float deltaTime) = 0;	
+	virtual void Update(float deltaTime) = 0;
+	/// <summary>
+	/// 状態の終了
+	/// </summary>
+	virtual void Finalize() = 0;
+
 	/// <summary>
 	/// アクターのメッセージを受け取る
 	/// </summary>

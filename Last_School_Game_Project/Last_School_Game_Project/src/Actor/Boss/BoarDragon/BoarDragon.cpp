@@ -23,9 +23,9 @@ BoarDragon::BoarDragon(IWorld & world, const Vector3 & position, Actor& player)
 		mesh.ChangeMotion(motion);
 	});
 	this->position.y += 3.2f;
-	stateManager.Add(static_cast<int>(State::Idle), std::make_shared<BoarDragon_Idle>());
+	stateManager.Add(static_cast<int>(State::Idle), std::make_shared<BoarDragon_Idle>(player,*this));
 	stateManager.Add(static_cast<int>(State::Move), std::make_shared<BoarDragon_Move>());
-	stateManager.Add(static_cast<int>(State::Attack), std::make_shared<BoarDragon_Attack>(world, *this, mesh));
+	stateManager.Add(static_cast<int>(State::Attack), std::make_shared<BoarDragon_Attack>(world,player, *this, mesh));
 	stateManager.Add(static_cast<int>(State::Damage), std::make_shared<BoarDragon_Damage>(mesh, hp));
 	stateManager.Add(static_cast<int>(State::Dead), std::make_shared<BoarDragon_Dead>(*this, mesh));
 	stateManager.Change(static_cast<int>(State::Idle));

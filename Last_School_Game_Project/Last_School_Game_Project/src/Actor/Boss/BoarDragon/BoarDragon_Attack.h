@@ -2,11 +2,12 @@
 
 #include "Actor/State/IState.h"
 #include "Mesh/SkinningMesh/SkinningMesh.h"
+#include "Actor/State/StateManager.h"
 #include"BoarDragon.h"
 
 class BoarDragon_Attack : public IState {
 public:
-	BoarDragon_Attack(IWorld& world, Actor& bossPtr, SkinningMesh& meshPtr);
+	BoarDragon_Attack(IWorld& world, Actor& playerPtr, Actor& bossPtr, SkinningMesh& meshPtr);
 	~BoarDragon_Attack();
 private:
 	/// <summary>
@@ -19,6 +20,11 @@ private:
 	/// </summary>
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) override;
+	/// <summary>
+	/// 状態の終了
+	/// </summary>
+	virtual void Finalize() override;
+
 	/// <summary>
 	/// アクターのメッセージを受け取る
 	/// </summary>
@@ -44,6 +50,8 @@ private:
 	/// <returns>次に再生するアニメーション番号</returns>
 	virtual int GetNextAnime() const override;
 private:
+	void BranchAttackType();
+public:
 	enum class AttackType {
 		Bite,
 		Rush,
@@ -51,11 +59,12 @@ private:
 	};
 private:
 	IWorld& world;
+	Actor& playerPtr;
 	Actor& bossPtr;
 	SkinningMesh& meshPtr;
 	bool isEnd;
 	BoarDragon::State state;
 	BoarDragon::Anime anime;
-	AttackType attackType;
+	StateManager stateManager;
 };
 

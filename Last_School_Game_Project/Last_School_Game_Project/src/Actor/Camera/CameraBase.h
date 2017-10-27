@@ -41,7 +41,7 @@ public:
 
 
 
-
+	void Initialize();
 	/// <summary>
 	/// 更新
 	/// </summary>
@@ -62,6 +62,7 @@ public:
 	void HandleMessage(EventMessage message, void* param = nullptr);
 
 protected:
+	virtual void OnInitialize();
 	virtual void OnUpdate(float deltaTime);
 	virtual void OnDraw(Renderer& renderer);
 	virtual void OnMessage(EventMessage message, void* param);
@@ -75,6 +76,4 @@ protected:
 	const Actor* target;
 	//カメラの座標
 	Vector3 position;
-	//!回転する基準の行列
-	Matrix4 pivot;
 };

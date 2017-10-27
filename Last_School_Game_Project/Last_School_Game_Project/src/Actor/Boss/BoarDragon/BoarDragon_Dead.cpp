@@ -27,6 +27,10 @@ void BoarDragon_Dead::Update(float deltaTime)
 	}
 }
 
+void BoarDragon_Dead::Finalize()
+{
+}
+
 void BoarDragon_Dead::HandleMessage(EventMessage message, void * param)
 {
 }

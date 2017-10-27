@@ -16,6 +16,10 @@ void BoarDragon_Move::Update(float deltaTime)
 {
 }
 
+void BoarDragon_Move::Finalize()
+{
+}
+
 void BoarDragon_Move::HandleMessage(EventMessage message, void * param)
 {
 }

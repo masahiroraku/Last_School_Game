@@ -49,6 +49,10 @@ void BowAttack::Update(float deltaTime)
 	playerPtr.SetPosition(position);
 }
 
+void BowAttack::Finalize()
+{
+}
+
 void BowAttack::HandleMessage(EventMessage message, void * param)
 {
 }
@@ -66,4 +70,17 @@ int BowAttack::GetNextState() const
 int BowAttack::GetNextAnime() const
 {
 	return anime;
+}
+
+void BowAttack::LookAtFront(const Vector3 & velocity)
+{
+	Vector3 front = cameraPtr.GetMatrix().GetFront();
+
+	float cameraYow = front.Yaw();
+	float inputYaw = velocity.Yaw();
+
+	Vector3 f = Vector3::CreateFromYawPitch(cameraYow + inputYaw, 0.0f);
+
+	playerPtr.SetMatrix(Matrix4::CreateLookAt(Vector3::Zero, f, playerPtr.GetMatrix().GetUp()));
+
 }

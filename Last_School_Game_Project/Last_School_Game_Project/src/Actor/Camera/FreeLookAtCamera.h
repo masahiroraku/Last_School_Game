@@ -7,6 +7,7 @@
 #include "Collision/ShapePtr.h"
 #include"Collision/BoundingSphere/BoundingSphere.h"
 #include"Math/Quaternion/Quaternion.h"
+#include"Actor/State/StateManager.h"
 
 /************************************************************
 * File Name	: FreeLookAtCamera.h
@@ -16,33 +17,33 @@
 *************************************************************/
 class FreeLookAtCamera : public CameraBase {
 public:
+	enum class State {
+		//!ターゲットを中心に回転する
+		Default,
+		//!射撃物を構える
+		Aim,
+		//!ロックオン
+		LockOn
+	};
+public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
 	/// <param name="world">world</param>
 	explicit FreeLookAtCamera(IWorld& world);
 	~FreeLookAtCamera();
-
+	virtual void OnInitialize() override;
 	virtual void OnUpdate(float deltaTime) override;
 	virtual void OnDraw(Renderer& renderer)override;
 	virtual void OnMessage(EventMessage message, void* param)override;
 private:
-	void RotationMovement(float deltaTime);
 
 private:
 	SimpleMesh skybox;
 
-	const float moveSpeed;
-	const float turnSpeed;
-	const float tiltMax;
-	const float tiltMin;
 	const float lookDistance;
+	StateManager stateManager;
 
-	Vector3 localPosition;
+	Vector3 lookat;
 
-	float lookAngle;
-	float tiltAngle;
-	Vector3 pivotEulers;
-	Quaternion pivotTargetRotate;
-	Quaternion transformTargetRotate;
 };

@@ -14,6 +14,12 @@
 enum class Scene {
 	//!デフォルト　＆　何のシーンでもない
 	None,
+	//!タイトル
+	Title,
+	//!メニュー
+	Menu,
 	//!ゲームメイン
-	GamePlay
+	GameMain,
+	//!リザルト
+	Result,
 };

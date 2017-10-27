@@ -44,6 +44,8 @@ public:
 
 	ActorPtr GetRoot(ActorGroup group);
 
+	void Clear();
+
 private:
 	void RegisterGroup();
 	void Collide();

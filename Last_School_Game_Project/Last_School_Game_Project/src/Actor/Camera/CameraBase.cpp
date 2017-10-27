@@ -10,7 +10,6 @@ CameraBase::CameraBase(IWorld & world)
 	, matrix()
 	, target(nullptr)
 	, position()
-	, pivot()
 {
 	//Near Far@‚ğİ’è
 	SetCameraNearFar(0.1f, 1000.0f);
@@ -44,6 +43,11 @@ std::list<ActorPtr> CameraBase::IsInsideCameraViewActors(ActorGroup group) const
 	}) >> to_list();
 }
 
+void CameraBase::Initialize()
+{
+	OnInitialize();
+}
+
 
 void CameraBase::Update(float deltaTime)
 {
@@ -58,6 +62,10 @@ void CameraBase::Draw(Renderer & renderer)
 void CameraBase::HandleMessage(EventMessage message, void * param)
 {
 	OnMessage(message, param);
+}
+
+void CameraBase::OnInitialize()
+{
 }
 
 void CameraBase::OnUpdate(float deltaTime)

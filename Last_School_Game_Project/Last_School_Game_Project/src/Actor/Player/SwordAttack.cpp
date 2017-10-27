@@ -8,7 +8,9 @@ SwordAttack::SwordAttack(Actor& swordPtr, SkinningMesh& meshPtr)
 	, stateManager()
 	, index(0)
 	, maxComboNum(0)
+	, swordPtr(swordPtr)
 {
+	//TODO: -2‚ð‚â‚ß‚é
 	stateManager.SetChangeFunc([&](int state, int motion) {
 		if (state == -2) {
 			isEnd = true;
@@ -40,6 +42,11 @@ void SwordAttack::Initialize()
 void SwordAttack::Update(float deltaTime)
 {
 	stateManager.Update(deltaTime);
+}
+
+void SwordAttack::Finalize()
+{
+	swordPtr.SetBodyActive(false);
 }
 
 void SwordAttack::HandleMessage(EventMessage message, void * param)

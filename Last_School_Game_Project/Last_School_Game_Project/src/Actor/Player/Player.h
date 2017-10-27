@@ -52,6 +52,7 @@ public:
 	~Player();
 
 private:
+	virtual void OnInitialize() override;
 	virtual void OnUpdate(float deltaTime) override;
 	virtual void OnDraw(Renderer& renderer) override;
 	virtual void OnCollide(const HitInfo& hitInfo) override;

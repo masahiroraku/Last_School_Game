@@ -22,6 +22,11 @@ private:
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) override;
 	/// <summary>
+	/// 状態の終了
+	/// </summary>
+	virtual void Finalize() override;
+
+	/// <summary>
 	/// アクターのメッセージを受け取る
 	/// </summary>
 	/// <param name="message">メッセージの種類</param>
@@ -45,6 +50,8 @@ private:
 	/// </summary>
 	/// <returns>次に再生するアニメーション番号</returns>
 	virtual int GetNextAnime() const override;
+private:
+	void LookAtFront(const Vector3& velocity);
 private:
 	bool isEnd;
 	Player::State state;

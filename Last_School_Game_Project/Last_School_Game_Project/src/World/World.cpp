@@ -1,8 +1,8 @@
 #include "World.h"
 #include "Actor/Base/ActorGroup.h"
-#include"Actor/Camera/Camera.h"
 #include"Actor/Field/Field.h"
 #include"Actor/Base/EventMessage.h"
+#include"Actor/Camera/CameraBase.h"
 
 World::World()
 	: actorManager()
@@ -16,11 +16,12 @@ World::~World() {
 }
 
 void World::Initialize() {
+	camera->Initialize();
 	actorManager.Initialize();
 }
 void World::Update(float deltaTime) {
-	camera->Update(deltaTime);
 	actorManager.Update(deltaTime);
+	camera->Update(deltaTime);
 }
 
 void World::Draw(Renderer& renderer) {
@@ -32,6 +33,11 @@ void World::Draw(Renderer& renderer) {
 
 void World::Finalize() {
 	actorManager.Finalize();
+}
+
+void World::Clear()
+{
+	actorManager.Clear();
 }
 
 void World::AddCamera(const CameraPtr& camera) {

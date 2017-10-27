@@ -28,6 +28,10 @@ void Damage::Update(float deltaTime)
 	isEnd = meshPtr.IsEndMotion();
 }
 
+void Damage::Finalize()
+{
+}
+
 void Damage::HandleMessage(EventMessage message, void * param)
 {
 	if (message != EventMessage::Damage || isDamage == true)

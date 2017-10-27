@@ -4,6 +4,13 @@
 #include<DxLib.h>
 #include"Utility/Color/Color.h"
 
+Bezier::Bezier()
+	: start()
+	, control()
+	, end()
+{
+}
+
 Bezier::Bezier(const Vector3 & start, const Vector3 & control, const Vector3 & end)
 	: start(start)
 	, control(control)

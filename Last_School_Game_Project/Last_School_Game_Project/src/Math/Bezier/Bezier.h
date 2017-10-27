@@ -9,6 +9,7 @@
 
 class Bezier {
 public:
+	Bezier();
 	Bezier(const Vector3& start, const Vector3& control, const Vector3& end);
 	Bezier(const Vector2& start, const Vector2& control, const Vector2& end);
 	~Bezier();

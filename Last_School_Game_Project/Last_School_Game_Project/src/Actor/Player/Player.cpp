@@ -27,30 +27,34 @@ Player::Player(IWorld & world, const Vector3 & position)
 	, isGround(true)
 	, hp(100)
 {
-	camera = &world.GetCamera();
-	camera->SetTarget(*this);
 
-	ActorPtr sword = std::make_shared<Sword>(world, mesh);
-	world.AddActor(ActorGroup::Weapon, sword);
-	world.AddActor(ActorGroup::Weapon, std::make_shared<Shield>(world, mesh));
-	world.AddActor(ActorGroup::Weapon, std::make_shared<Bow>(world, mesh));
-
-	stateManager.SetChangeFunc([&](int state, int motion) {
-		mesh.ChangeMotion(motion);
-	});
-	stateManager.Add(static_cast<int>(State::Idle), std::make_shared<Idle>());
-	stateManager.Add(static_cast<int>(State::Move), std::make_shared<Move>(*this, *camera,mesh));
-	stateManager.Add(static_cast<int>(State::SwordAttack), std::make_shared<SwordAttack>(*sword, mesh));
-	stateManager.Add(static_cast<int>(State::Guard), std::make_shared<Guard>(mesh));
-	stateManager.Add(static_cast<int>(State::Damage), std::make_shared<Damage>(mesh,hp));
-	stateManager.Add(static_cast<int>(State::Dead), std::make_shared<Dead>(*this,mesh));
-	stateManager.Add(static_cast<int>(State::BowAttack), std::make_shared<BowAttack>(world, *this, *camera , mesh));
-
-	stateManager.Change(static_cast<int>(State::Idle));
+	matrix = Matrix4::CreateFromAxisAngle(Vector3::Up, 180.0f);
 }
 
 Player::~Player()
 {
+}
+
+void Player::OnInitialize()
+{
+	ActorPtr sword = std::make_shared<Sword>(*world, mesh);
+	world->AddActor(ActorGroup::Weapon, sword);
+	world->AddActor(ActorGroup::Weapon, std::make_shared<Shield>(*world, mesh));
+	world->AddActor(ActorGroup::Weapon, std::make_shared<Bow>(*world, mesh));
+
+	camera = &world->GetCamera();
+	stateManager.SetChangeFunc([&](int state, int motion) {
+		mesh.ChangeMotion(motion);
+	});
+	stateManager.Add(static_cast<int>(State::Idle), std::make_shared<Idle>());
+	stateManager.Add(static_cast<int>(State::Move), std::make_shared<Move>(*this, *camera, mesh));
+	stateManager.Add(static_cast<int>(State::SwordAttack), std::make_shared<SwordAttack>(*sword, mesh));
+	stateManager.Add(static_cast<int>(State::Guard), std::make_shared<Guard>(mesh));
+	stateManager.Add(static_cast<int>(State::Damage), std::make_shared<Damage>(mesh, hp));
+	stateManager.Add(static_cast<int>(State::Dead), std::make_shared<Dead>(*this, mesh));
+	stateManager.Add(static_cast<int>(State::BowAttack), std::make_shared<BowAttack>(*world, *this, *camera, mesh));
+
+	stateManager.Change(static_cast<int>(State::Idle));
 }
 
 void Player::OnUpdate(float deltaTime)
@@ -58,8 +62,6 @@ void Player::OnUpdate(float deltaTime)
 	mesh.Update(deltaTime);
 	stateManager.Update(deltaTime);
 
-	
-	
 }
 
 void Player::OnDraw(Renderer & renderer)
@@ -67,6 +69,8 @@ void Player::OnDraw(Renderer & renderer)
 #if _DEBUG
 	body->Transform(GetMatrix())->Draw();
 #endif
+
+
 	mesh.Draw(renderer, GetMatrix());
 }
 

@@ -1,6 +1,7 @@
 #include"StateManager.h"
 #include"IState.h"
 #include"Actor/Base/EventMessage.h"
+#include"StateNull.h"
 
 StateManager::StateManager()
 	: stateContainer()
@@ -8,7 +9,7 @@ StateManager::StateManager()
 	, onChangeFunc([](int,int) {})
 	, id(-1)
 {
-
+	currentState = std::make_shared<StateNull>();
 }
 StateManager::~StateManager() {
 }
@@ -33,6 +34,7 @@ void StateManager::Change(int id, int motion)
 	if (this->id == id || id < -1)
 		return;
 	this->id = id;
+	currentState->Finalize();
 	currentState = stateContainer.at(id);
 	currentState->Initialize();
 }

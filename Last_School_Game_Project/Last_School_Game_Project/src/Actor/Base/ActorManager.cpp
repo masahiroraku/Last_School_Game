@@ -7,11 +7,10 @@
 ActorManager::ActorManager()
 	: root("Root")
 {
+	RegisterGroup();
 }
 
 void ActorManager::Initialize() {
-	root.ClearChildren();
-	RegisterGroup();
 	root.Initialize();
 }
 
@@ -27,8 +26,8 @@ void ActorManager::Draw(Renderer& renderer) {
 
 void ActorManager::Finalize() {
 	root.Finalize();
-	root.ClearChildren();
-	actors.clear();
+	Clear();
+
 }
 
 void ActorManager::AddActor(ActorGroup group, const ActorPtr& actor) {
@@ -60,6 +59,12 @@ ActorPtr ActorManager::FindActor(ActorGroup group, const std::string& name) {
 ActorPtr ActorManager::GetRoot(ActorGroup group)
 {
 	return actors[group];
+}
+
+void ActorManager::Clear()
+{
+	root.ClearChildren();
+	actors.clear();
 }
 
 void ActorManager::RegisterGroup() {

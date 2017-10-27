@@ -28,6 +28,10 @@ void BoarDragon_Damage::Update(float deltaTime)
 	isEnd = meshPtr.IsEndMotion();
 }
 
+void BoarDragon_Damage::Finalize()
+{
+}
+
 void BoarDragon_Damage::HandleMessage(EventMessage message, void * param)
 {
 	if (message != EventMessage::Damage || isDamage == true)

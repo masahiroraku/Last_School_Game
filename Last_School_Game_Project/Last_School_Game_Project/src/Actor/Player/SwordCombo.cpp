@@ -36,6 +36,11 @@ void SwordCombo::Update(float deltaTime)
 	}
 }
 
+void SwordCombo::Finalize()
+{
+	swordPtr.SetBodyActive(false);
+}
+
 void SwordCombo::HandleMessage(EventMessage message, void * param)
 {
 }

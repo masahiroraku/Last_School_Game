@@ -22,6 +22,11 @@ private:
 	/// <param name="deltaTime">１フレーム</param>
 	virtual void Update(float deltaTime) override;
 	/// <summary>
+	/// 状態の終了
+	/// </summary>
+	virtual void Finalize() override;
+
+	/// <summary>
 	/// アクターのメッセージを受け取る
 	/// </summary>
 	/// <param name="message">メッセージの種類</param>
@@ -48,6 +53,7 @@ private:
 private:
 	bool isEnd;
 	StateManager stateManager;
+	Actor& swordPtr;
 	int index;
 	int maxComboNum;
 };

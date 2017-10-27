@@ -22,6 +22,7 @@ Move::~Move()
 
 void Move::Initialize()
 {
+	position = player.GetPosition();
 	isEnd = false;
 	state = Player::State::Idle;
 	anime = Player::Anime::Idle_;
@@ -63,8 +64,10 @@ void Move::Update(float deltaTime)
 	position += -cameraMatrix.GetFront() * velocity.z * speed  * deltaTime;
 	position += -cameraMatrix.GetLeft()  * velocity.x * speed  * deltaTime;
 	player.SetPosition(position);
+}
 
-
+void Move::Finalize()
+{
 }
 
 void Move::HandleMessage(EventMessage message, void * param)

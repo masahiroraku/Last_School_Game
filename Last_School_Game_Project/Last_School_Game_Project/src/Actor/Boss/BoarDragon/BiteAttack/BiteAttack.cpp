@@ -2,52 +2,52 @@
 #include "Collision/BoundingSphere/BoundingSphere.h"
 #include "Collision/HitInfo.h"
 #include "Actor/Weapon/WeaponHitInfo.h"
+#include "World/IWorld.h"
+#include"BiteCollision.h"
 
 BiteAttack::BiteAttack(IWorld& world, SkinningMesh & meshPtr)
-	: Actor(world, "BiteAttack", Vector3::Zero, std::make_shared<BoundingSphere>(Vector3::Zero, 1.0f))
+	: isEnd(false)
+	, world(world)
 	, meshPtr(meshPtr)
-	, ToggleBoneIndex(17)
-	, enableCollideTime()
-	, damage(30)
 {
-	tag = ActorTag::EnemyWeapon;
-	enableCollideTime = std::make_pair(19.0f, 21.0f);
-	body->isActive = false;
-	position = meshPtr.GetBonePosition(ToggleBoneIndex);
 }
 
 BiteAttack::~BiteAttack()
 {
 }
 
-void BiteAttack::OnUpdate(float deltaTime)
+void BiteAttack::Initialize()
+{
+	isEnd = false;
+	world.AddActor(ActorGroup::Enemy, std::make_shared<BiteCollision>(world, meshPtr));
+}
+
+void BiteAttack::Update(float deltaTime)
 {
 	if (meshPtr.IsEndMotion()) {
-		status = Status::Dead;
-		return;
+		isEnd = true;
 	}
-	position = meshPtr.GetBonePosition(ToggleBoneIndex);
-	body->isActive = IsEnableCollideTime();
 }
 
-void BiteAttack::OnDraw(Renderer & renderer)
-{
-#if _DEBUG
-	body->Transform(GetMatrix())->Draw();
-#endif
-}
-
-void BiteAttack::OnCollide(const HitInfo & hitInfo)
-{
-	WeaponHitInfo weaponInfo(tag, damage);
-	hitInfo.collideActor->HandleMessage(EventMessage::Damage, &weaponInfo);
-}
-
-void BiteAttack::OnMessage(EventMessage message, void * param)
+void BiteAttack::Finalize()
 {
 }
 
-bool BiteAttack::IsEnableCollideTime() const
+void BiteAttack::HandleMessage(EventMessage message, void * param)
 {
-	return meshPtr.GetMotionTime() >= enableCollideTime.first && enableCollideTime.second >= meshPtr.GetMotionTime();
+}
+
+bool BiteAttack::IsEnd() const
+{
+	return isEnd;
+}
+
+int BiteAttack::GetNextState() const
+{
+	return -2;
+}
+
+int BiteAttack::GetNextAnime() const
+{
+	return 0;
 }

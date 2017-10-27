@@ -47,6 +47,10 @@ void Idle::Update(float deltaTime)
 	}
 }
 
+void Idle::Finalize()
+{
+}
+
 void Idle::HandleMessage(EventMessage message, void * param)
 {
 }

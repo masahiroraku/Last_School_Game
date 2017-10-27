@@ -40,6 +40,10 @@ void Guard::Update(float deltaTime)
 	}
 }
 
+void Guard::Finalize()
+{
+}
+
 void Guard::HandleMessage(EventMessage message, void * param)
 {
 }
